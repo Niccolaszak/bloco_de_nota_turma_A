@@ -6,12 +6,14 @@ class NoteCard extends StatelessWidget {
   final Note note;
   final VoidCallback onTap;
   final VoidCallback onDelete;
+  final VoidCallback onToggleArchive;
 
   const NoteCard({
     super.key,
     required this.note,
     required this.onTap,
     required this.onDelete,
+    required this.onToggleArchive,
   });
 
   @override
@@ -116,13 +118,28 @@ class NoteCard extends StatelessWidget {
                 ),
               ),
 
-              IconButton(
-                onPressed: onDelete,
-                icon: const Icon(
-                  Icons.delete_outline_rounded,
-                  color:
-                      Color(0xFFB45F6C),
-                ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    tooltip: note.isArchived ? 'Desarquivar nota' : 'Arquivar nota',
+                    onPressed: onToggleArchive,
+                    icon: Icon(
+                      note.isArchived
+                          ? Icons.unarchive_outlined
+                          : Icons.archive_outlined,
+                      color: const Color(0xFF6C4AB6),
+                    ),
+                  ),
+                  IconButton(
+                    tooltip: 'Excluir nota',
+                    onPressed: onDelete,
+                    icon: const Icon(
+                      Icons.delete_outline_rounded,
+                      color: Color(0xFFB45F6C),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

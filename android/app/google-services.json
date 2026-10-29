@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "917005993637",
-    "project_id": "blocodenotasturmaa",
-    "storage_bucket": "blocodenotasturmaa.firebasestorage.app"
+    "project_number": "477155400908",
+    "project_id": "dbrobertinho",
+    "storage_bucket": "dbrobertinho.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:917005993637:android:93d6c01000c35761d0af4c",
+        "mobilesdk_app_id": "1:477155400908:android:dce8e72d624cbc390bf669",
         "android_client_info": {
           "package_name": "com.example.bloco_de_nota_turma_a"
         }
@@ -15,7 +15,26 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB9LiQ3tI8ioFn2SCtyLWo10RZcxgRFvxg"
+          "current_key": "AIzaSyAIBrsr1EszJQQSdc6jrDSvoqCaHDnUNOY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:477155400908:android:3037313f7dec32d70bf669",
+        "android_client_info": {
+          "package_name": "com.example.projeto"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIBrsr1EszJQQSdc6jrDSvoqCaHDnUNOY"
         }
       ],
       "services": {

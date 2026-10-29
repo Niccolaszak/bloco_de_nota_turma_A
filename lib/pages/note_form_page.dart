@@ -14,17 +14,24 @@ class NoteFormPage extends StatefulWidget {
 }
 
 class _NoteFormPageState extends State<NoteFormPage> {
+  static const categories = ['Geral', 'Pessoal', 'Trabalho', 'Estudos'];
+
   final titleController = TextEditingController();
 
   final contentController = TextEditingController();
 
   final database = DatabaseHelper.instance;
+  late String selectedCategory;
 
   bool get isEditing => widget.note != null;
 
   @override
   void initState() {
     super.initState();
+    selectedCategory = widget.note?.category ?? 'Geral';
+    if (!categories.contains(selectedCategory)) {
+      selectedCategory = 'Geral';
+    }
 
     if (isEditing) {
       titleController.text = widget.note!.title;
@@ -74,6 +81,10 @@ class _NoteFormPageState extends State<NoteFormPage> {
       title: title,
       content: content,
       date: date,
+      category: selectedCategory,
+      isArchived: widget.note?.isArchived ?? false,
+      createdAt: widget.note?.createdAt ?? now,
+      updatedAt: now,
     );
 
     // Verificamos se estamos criando
@@ -141,6 +152,27 @@ class _NoteFormPageState extends State<NoteFormPage> {
                 contentPadding: EdgeInsets.symmetric(horizontal: 4),
               ),
             ),
+
+            const SizedBox(height: 12),
+            DropdownButtonFormField<String>(
+              initialValue: selectedCategory,
+              decoration: const InputDecoration(
+                labelText: 'Categoria',
+                border: OutlineInputBorder(),
+              ),
+              items: categories
+                  .map((category) => DropdownMenuItem(
+                        value: category,
+                        child: Text(category),
+                      ))
+                  .toList(),
+              onChanged: (category) {
+                if (category != null) {
+                  setState(() => selectedCategory = category);
+                }
+              },
+            ),
+            const SizedBox(height: 12),
 
             const Divider(color: Color(0xFFE4DFEA)),
 
