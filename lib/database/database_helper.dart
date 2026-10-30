@@ -1,6 +1,7 @@
 import 'package:bloco_de_nota_turma_a/models/note.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -173,8 +174,9 @@ class DatabaseHelper {
         where: 'id = ? AND firestoreId = ?',
         whereArgs: [note.id, note.firestoreId],
       );
-    } catch (_) {
-      // A nota já está salva localmente e será reenviada na próxima sincronização.
+    } catch (e, stackTrace) {
+      debugPrint('Falha ao enviar nota ao Firestore: $e');
+      debugPrintStack(stackTrace: stackTrace);
     }
   }
 

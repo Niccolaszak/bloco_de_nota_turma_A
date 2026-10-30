@@ -5,26 +5,37 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:bloco_de_nota_turma_a/main.dart';
+import 'package:bloco_de_nota_turma_a/models/note.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  test('converte uma nota entre objeto e mapa do SQLite', () {
+    final note = Note(
+      id: 7,
+      uid: 'user-123',
+      title: 'Nota de teste',
+      content: 'Conteúdo da nota',
+      date: '30/10/2026 12:00',
+      category: 'Estudos',
+      isArchived: true,
+      createdAt: DateTime.parse('2026-10-30T12:00:00.000'),
+      updatedAt: DateTime.parse('2026-10-30T12:30:00.000'),
+      firestoreId: 'firestore-note-7',
+      needsSync: true,
+    );
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    final restored = Note.fromMap(note.toMap());
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(restored.id, note.id);
+    expect(restored.uid, note.uid);
+    expect(restored.title, note.title);
+    expect(restored.content, note.content);
+    expect(restored.category, note.category);
+    expect(restored.isArchived, note.isArchived);
+    expect(restored.createdAt, note.createdAt);
+    expect(restored.updatedAt, note.updatedAt);
+    expect(restored.firestoreId, note.firestoreId);
+    expect(restored.needsSync, note.needsSync);
   });
 }

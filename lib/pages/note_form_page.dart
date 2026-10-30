@@ -77,6 +77,7 @@ class _NoteFormPageState extends State<NoteFormPage> {
     //     o ID será null.
     final note = Note(
       id: widget.note?.id,
+      firestoreId: widget.note?.firestoreId,
       uid: user.uid,
       title: title,
       content: content,
